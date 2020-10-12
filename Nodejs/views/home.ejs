@@ -1,0 +1,35 @@
+<%- include('partials/header') %>
+
+
+<div class="container-fluid table-responsive bg-white text-dark" id="mainContent">
+  <table class="table table-striped"> <!--table-hover -->
+    <thead>
+      <tr>
+        <th></th> <!-- The column name above the 'Recommend' button is left blank -->
+        <% headers.forEach(function(col) { %>
+          <th>
+            <%= col %>
+          </th>
+        <% }); %>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% moviesList.forEach(function(entry) { %>
+        <form class="" action="/recommendation/<%= entry['Title'] %>" method="get">
+          <tr class='clickable-row' data-href="/recommendation/<%= entry['Title'] %>">
+            <td><button type="submit" name="movieTitle" value="<%= entry["Title"] %>" class="btn btn-secondary">Recommend</button></td>
+            <% headers.forEach(function(key) { %>
+              <td>
+                <%= entry[key] %>
+              </td>
+            <% }); %>
+          </tr>
+        </form>
+      <% }); %>
+    </tbody>
+  </table>
+</div>
+
+
+<%- include('partials/footer') %>

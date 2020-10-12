@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Caremada Front End</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+  <style>
+  #searchbar {
+    width:800px;
+  }
+  </style>
+</head>
+
+<body>
+
+  <div class="bg-secondary text-white" >
+
+    <header class="navbar p-3 bg-dark text-white">
+      <img class ="p-3" src="/images/logo-white-40.png" >
+        <form class="p-3 form-inline mr-auto">
+          <input class="form-control" id="searchbar" onkeyup="<>" type="text"
+          name= "search" placeholder="Search..">
+          <button class ="btn btn-secondary btn-rounded btn-sm my-0 ml-sm-2" type="submit" >Search</button>
+        </form>
+      <!-- TODO this will be dynamic -->
+      <h5>Welcome User1 </h5>
+    </header>
+
+    <div class="container-fluid p-3 mb-2 bg-dark text-white ">
+      <button type="button" class="btn btn-secondary">View Caregiver database</button>
+      <button type="button" class="btn btn-secondary">View Patient database</button>
+      <div class="btn-group">
+        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">
+           other
+        </button>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="#">other</a>
+          <a class="dropdown-item" href="#">other</a>
+        </div>
+      </div>
+      <a class=" float-right nav-link active" href="#">Logout</a>
+    </div>
