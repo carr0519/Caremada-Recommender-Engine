@@ -12,26 +12,26 @@
         </button>
         <div class="dropdown-menu p-3">
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="actionCheck" onchange="filter(this)">
-            <label class="form-check-label" for="actionCheck">
+            <input class="form-check-input" type="checkbox" value="" id="Action" onclick="filter('Action')">  
+            <label class="form-check-label" for="Action">
               Action
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="adventCheck">
-            <label class="form-check-label" for="adventCheck">
+            <input class="form-check-input" type="checkbox" value="" id="Adventure" onclick="filter('Adventure')">
+            <label class="form-check-label" for="Adventure">
               Adventure
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="sciCheck">
-            <label class="form-check-label" for="SciCheck">
+            <input class="form-check-input" type="checkbox" value="" id="Sci-Fi" onclick="filter('Sci-Fi')">
+            <label class="form-check-label" for="Sci-Fi">
               Sci-Fi
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="thrillerCheck">
-            <label class="form-check-label" for="thrillerCheck">
+            <input class="form-check-input" type="checkbox" value="" id="Thriller" onclick="filter('Thriller')">
+            <label class="form-check-label" for="Thriller">
               Thriller
             </label>
           </div>
@@ -74,26 +74,26 @@
         </button>
         <div class="dropdown-menu p-3">
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="Meta0-30Check">
-            <label class="form-check-label" for="Meta0-30Check">
+            <input class="form-check-input" type="checkbox" value="" id="10-30" onclick="filterRating('10-30')">
+            <label class="form-check-label" for="10-30">
               10 - 30
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="Meta3-5Check">
-            <label class="form-check-label" for="Meta3-5Check">
+            <input class="form-check-input" type="checkbox" value="" id="31-50" onclick="filterRating('31-50')">
+            <label class="form-check-label" for="31-50">
               31 - 50
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="Meta5-7Check">
-            <label class="form-check-label" for="Meta5-7Check">
+            <input class="form-check-input" type="checkbox" value="" id="51-70" onclick="filterRating('51-70')">
+            <label class="form-check-label" for="51-70">
               51 - 70
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="Meta7-1Check">
-            <label class="form-check-label" for="Meta7-1Check">
+            <input class="form-check-input" type="checkbox" value="" id="71-100" onclick="filterRating('71-100')">
+            <label class="form-check-label" for="71-100">
               71 - 100
             </label>
           </div>
@@ -126,7 +126,7 @@
                 </button>
               </td>
               <% headers.forEach(function(key) { %>
-              <td id="<%= key %><%= index %>">
+              <td id="testItem<%= key %><%= index %>">
                 <%= entry[key] %>
               </td>
               <% }); %>
@@ -143,24 +143,58 @@
 
   function filter(checkboxElem){
 
-  const length = <%= moviesList.length %>;
-  let td, table, tr;
-  table = document.getElementById("myTable");
-  tr = table.getElementsByTagName("tr");
-
-  for(let i =0; i < length; i++) {
-    //Get genre column
-    td = tr[i].getElementByTagName("td")[2];
-
-    if(checkboxElem.checked){
-      if('Action' in td){
-        document.getElementById('row'+i).style.display = 'none';
+    const length = <%= moviesList.length %>;
+    const checkbox = document.getElementById(checkboxElem)
+  
+    if(document.getElementById(checkboxElem).checked){
+      for(let i =0; i < length; i++) {
+        var row = document.getElementById('row'+i);
+        //TODO change genre
+        var item = document.getElementById('testItem'+'Genre'+i);
+        if(!item.textContent.includes(checkboxElem)){
+          document.getElementById('row'+i).style.display = 'none';
+        }
+      }
+    }else{
+      for (let i = 0; i < length; i++) {
+          document.getElementById('row'+i).style.display = 'table-row';
       }
     }
-    else{
-      document.getElementById('row'+i).style.display = 'table-row';
-    }
+
   }
+
+  function filterRating(checkboxElem){
+    const length = <%= moviesList.length %>;
+    const checkbox = document.getElementById(checkboxElem)
+    var ratingCheck = checkboxElem.split("-");
+    var min = parseFloat(ratingCheck[0]);
+    var max = parseFloat(ratingCheck[1]);
+
+    if(document.getElementById(checkboxElem).checked){
+      for(let i =0; i < length; i++) {
+        var row = document.getElementById('row'+i);
+        var item = document.getElementById('testItem'+'Metascore'+i);
+        //rating of current item
+        var itemRating = parseFloat(item.textContent);
+        //dont display items without rating
+        if(Number.isNaN(itemRating)){
+          document.getElementById('row'+i).style.display = 'none';
+        }
+        if(min <= itemRating && max <= itemRating){
+          document.getElementById('row'+i).style.display = 'none';
+        }
+      }
+    }else{
+      for (let i = 0; i < length; i++) {
+          document.getElementById('row'+i).style.display = 'table-row';
+      }
+    }
+
+    function deSelect(input){
+      
+    }
+
+    
 
   }
   // const checkbox = document.getElementById('actionCheck')
@@ -169,10 +203,13 @@
   // checkbox.addEventListener('change', (event) => {
   //   if (event.target.checked) {
   //     for (let i = 0; i < length; i++) {
-  //       // if (i % 2 == 0) {
+  //       var y = document.getElementById('row'+i);
+  //       // why is this null
+  //       var goddamn = document.getElementById("testItem"+"Genre"+i);
+  //        if (!goddamn.textContent.includes("Action")) {
   //         document.getElementById('row'+i).style.display = 'none';
-  //         document.getElementById('test').innerHTML = checkbox.value;
-  //       //}
+  //         //document.getElementById('test').innerHTML = checkbox.value;
+  //       }
   //     }
   //   } else {
   //     for (let i = 0; i < length; i++) {
