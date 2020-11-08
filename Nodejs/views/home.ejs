@@ -146,7 +146,7 @@
   function filter(checkboxElem){
 
     const length = <%= moviesList.length %>;
-    const checkbox = document.getElementById(checkboxElem)
+    const checkbox = document.getElementById('checkboxElem');
   
     if(document.getElementById(checkboxElem).checked){
       for(let i =0; i < length; i++) {
@@ -167,7 +167,7 @@
 
   function filterRating(checkboxElem){
     const length = <%= moviesList.length %>;
-    const checkbox = document.getElementById(checkboxElem)
+    const checkbox = document.getElementById('checkboxElem');
     var ratingCheck = checkboxElem.split("-");
     var min = parseFloat(ratingCheck[0]);
     var max = parseFloat(ratingCheck[1]);
@@ -192,32 +192,27 @@
       }
     }
 
-    //TODO user should be only able to select one checkbox ?
-    function deSelect(input){
-      
-    }
+}
 
-  }
+function filterSearch(){
+    var filter;
+    const length = <%= moviesList.length %>;
+    const searchItem = document.getElementById('searchbar');
+    filter = searchItem.value;
 
-  const checkbox = document.getElementById('actionCheck')
-  const length = <%= moviesList.length %>;
-  
-  checkbox.addEventListener('change', (event) => {
-    if (event.target.checked) {
-      for (let i = 0; i < length; i++) {
-        if (i % 2 == 0) {
-          document.getElementById('row'+i).style.display = 'none';
-          //document.getElementById('test').innerHTML = checkbox.value;
-        }
+    for(let i=0; i < length; i++){
+      var row = document.getElementById('row'+i);
+      var item = document.getElementById('testItem'+'Title'+i);
+      if(!item.textContent.includes(filter)){
+         document.getElementById('row'+i).style.display = 'none';
       }
-    } else {
-      for (let i = 0; i < length; i++) {
-        if (i % 2 == 0) {
+      else{
           document.getElementById('row'+i).style.display = 'table-row';
-        }
       }
     }
-  })
+  
+}
+  
 
 
 </script>
