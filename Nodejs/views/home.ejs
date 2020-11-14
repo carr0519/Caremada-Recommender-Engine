@@ -1,168 +1,18 @@
 <%- include('partials/header') %>
 
-<div class="container-fluid table-responsive bg-white text-dark" id="mainContent">
-  <div class="row">
-
-    <!--TODO id and for attributes will need to be changed-->
-    <div class="col-sm-1 border">
-      <h4>Filter</h4>
-      <div class="btn-group">
-        <button type="button" class="btn btn-info dropdown-toggle m-1" data-toggle="dropdown">
-          Genre
-        </button>
-        <div class="dropdown-menu p-3">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="actionCheck">
-            <label class="form-check-label" for="actionCheck">
-              Action
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="adventCheck">
-            <label class="form-check-label" for="adventCheck">
-              Adventure
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="sciCheck">
-            <label class="form-check-label" for="SciCheck">
-              Sci-Fi
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="thrillerCheck">
-            <label class="form-check-label" for="thrillerCheck">
-              Thriller
-            </label>
-          </div>
-        </div>      <!--End of Genre dropdown-menu-->
-      </div>     <!--End of Genre btn-group-->
-      <div class="btn-group">
-        <button type="button" class="btn btn-info dropdown-toggle m-1" data-toggle="dropdown">
-          Rating
-        </button>
-        <div class="dropdown-menu p-3">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="Rating1-3Check">
-            <label class="form-check-label" for="Rating1-3Check">
-              1.0 - 3.0
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="Rating3-5Check">
-            <label class="form-check-label" for="Rating3-5Check">
-              3.1 - 5.0
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="Rating5-7Check">
-            <label class="form-check-label" for="Rating5-7Check">
-              5.1 - 7.0
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="Rating7-1Check">
-            <label class="form-check-label" for="Rating7-1Check">
-              7.1 - 10.0
-            </label>
-          </div>
-        </div>
-      </div> <!-- End of Rating btn-group-->
-      <div class="btn-group">
-        <button type="button" class="btn btn-info dropdown-toggle m-1" data-toggle="dropdown">
-          Metascore
-        </button>
-        <div class="dropdown-menu p-3">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="Meta0-30Check">
-            <label class="form-check-label" for="Meta0-30Check">
-              10 - 30
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="Meta3-5Check">
-            <label class="form-check-label" for="Meta3-5Check">
-              31 - 50
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="Meta5-7Check">
-            <label class="form-check-label" for="Meta5-7Check">
-              51 - 70
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="Meta7-1Check">
-            <label class="form-check-label" for="Meta7-1Check">
-              71 - 100
-            </label>
-          </div>
-        </div>
-      </div>
-    </div> <!--End of filter menus column-->
-
-
-    <div class="col-sm-10">
-      <table class="table table-striped">
-        <!--table-hover -->
-        <thead>
-          <tr>
-            <th></th> <!-- The column name above the 'Recommend' button is left blank -->
-            <% headers.forEach(function(col) { %>
-            <th>
-              <%= col %>
-            </th>
-            <% }); %>
-          </tr>
-        </thead>
-
-        <tbody>
-          <% moviesList.forEach(function(entry, index) { %>
-          <form class="" action="/recommendation/<%= entry['Title'] %>" method="get">
-            <tr class='clickable-row' data-href="/recommendation/<%= entry['Title'] %>" id="row<%= index %>">
-              <td>
-                <button type="submit" name="movieTitle" value="<%= entry['Title'] %>"
-                  class="btn btn-secondary">Recommend
-                </button>
-              </td>
-              <% headers.forEach(function(key) { %>
-              <td id="<%= key %><%= index %>">
-                <%= entry[key] %>
-              </td>
-              <% }); %>
-            </tr>
-          </form>
-          <% }); %>
-        </tbody>
-      </table>
-    </div>
+<br><br><br><br>
+<div class="container-fluid table-responsive" id="mainContent">
+  <div class="cover-container d-flex h-100 p-3 mx-auto flex-column text-center">
+    <main role="main" class="inner cover">
+      <h1 class="cover-heading">Recommender Engine Testing Environment</h1><br>
+      <p class="lead">Load a DataSet to Begin</p><br>
+      <p class="lead">
+        <a href="/dataset/movies" class="btn btn-lg btn-secondary">  Movies  </a>
+        <a href="/dataset/caregivers" class="btn btn-lg btn-secondary">Caregivers</a>
+      </p>
+    </main>
   </div>
 </div>
 
-<script>
 
-  const checkbox = document.getElementById('actionCheck')
-  const length = <%= moviesList.length %>;
-  
-  checkbox.addEventListener('change', (event) => {
-    if (event.target.checked) {
-      for (let i = 0; i < length; i++) {
-        if (i % 2 == 0) {
-          document.getElementById('row'+i).style.display = 'none';
-          //document.getElementById('test').innerHTML = checkbox.value;
-        }
-      }
-    } else {
-      for (let i = 0; i < length; i++) {
-        if (i % 2 == 0) {
-          document.getElementById('row'+i).style.display = 'table-row';
-        }
-      }
-    }
-  })
-
-</script>
-
-
-
-  <%- include('partials/footer') %>
+<%- include('partials/footer') %>

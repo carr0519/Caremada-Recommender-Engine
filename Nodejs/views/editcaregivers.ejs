@@ -1,0 +1,58 @@
+<%- include('partials/header') %>
+
+<div class="container mt-5">
+
+  <h2>Edit Caregiver Record</h2><br><br>
+
+  <form class="" action="/edit/caregivers" method="post">
+    
+    <div class="form-group">
+      <label for="Rank">Rank</label>
+      <input type="text" id="Rank" name="Rank" class="form-control" value="<%= record.Rank %>" required>
+    </div>
+
+    <div class="form-group">
+      <label for="Name">Name</label>
+      <input type="text" id="Name" name="Name" class="form-control" value="<%= record.Name %>" required>
+    </div>
+
+    <div class="form-group">
+      <label for="Occupation">Occupation</label>
+      <input type="text" id="Occupation" name="Occupation" class="form-control" value="<%= record.Occupation %>" required>
+    </div>
+
+    <div class="form-group">
+      <label for="Genre">Genre</label>
+      <input type="text" id="Genre" name="Genre" class="form-control" value="<%= record.Genre %>" required>
+    </div>
+
+    <div class="form-group">
+      <label for="Age">Age</label>
+      <input type="number" id="Age" name="Age" class="form-control" value="<%= record.Age %>" required>
+    </div><br>
+
+    <div class="form-group">
+        <label for="Availability">Availability</label>
+        <input type="text" id="Availability" name="Availability" class="form-control" value="<%= record.Availability %>" required>
+    </div>
+
+    <div class="form-group">
+        <label for="Location">Location</label>
+        <input type="text" id="Location" name="Location" class="form-control" value="<%= record.Location %>" required>
+    </div>
+
+    <div class="form-group">
+        <label for="Rating">Rating</label>
+        <input type="number" id="Rating" name="Rating" class="form-control" value="<%= record.Rating %>" required>
+      </div><br>
+
+
+    <input type="hidden" id="_id" name="_id" class="" value="<%= record._id %>">
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+
+  <br><br><br>
+</div>
+
+<%- include('partials/footer') %>

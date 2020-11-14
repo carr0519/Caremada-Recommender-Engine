@@ -1,22 +1,19 @@
 const mongoose = require('mongoose');
 
 const movieSchema = new mongoose.Schema({
-  Rank: Number,
-  Title: String,
-  Genre: String,
-  Description: String,
-  Director: String,
-  Actors: String,
-  Year: Number,
+  'Title': String,
+  'Genre': String,
+  'Description': String,
+  'Director': String,
+  'Actors': String,
+  'Year': Number,
   'Runtime (Minutes)': Number,
-  Rating: Number,
-  Votes: Number,
+  'Rating': Number,
+  'Votes': Number,
   'Revenue (Millions)': Number,
-  Metascore: Number
+  'Metascore': Number
 });
 
 let headers = Object.keys(movieSchema.paths);
-headers.pop(); // removes the _id field
-
 module.exports.model = mongoose.model('Movie', movieSchema);
 module.exports.headers = headers;
