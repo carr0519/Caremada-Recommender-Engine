@@ -19,23 +19,27 @@ module.exports =
     {
         switch (datasetName) {
             case 'caregivers':
-                await Caregiver.deleteMany({});
+                await new Promise((resolve, reject) => {
+                    Caregiver.deleteMany({}, err => {
+                        if (err) { reject(err); }
+                        else { resolve(); }
+                    });
+                });
                 await csvtojson()
                     .fromFile(__dirname + "/Mock_Caremada.csv")
-                    .then(csvData => {
-                        Caregiver.create(csvData);
-                    });
+                    .then(csvData => Caregiver.create(csvData));
                 break;
-            
             case 'movies':
-                await Movie.deleteMany({});
+                await new Promise((resolve, reject) => {
+                    Movie.deleteMany({}, err => {
+                        if (err) { reject(err); }
+                        else { resolve(); }
+                    });
+                });
                 await csvtojson()
                     .fromFile(__dirname + "/sample_movie_dataset.csv")
-                    .then(csvData => {
-                        Movie.create(csvData);
-                    });
+                    .then(csvData => Movie.create(csvData));
                 break;
-
             default:
                 console.log(`fatal error in func reloadDataSet: unrecognized table name \'${datasetName}\'`);
         }
@@ -47,13 +51,11 @@ module.exports =
             case 'caregivers':
                 await Caregiver.create(record);
                 break;
-            
             case 'movies':
                 await Movie.create(record);
                 break;
-
             default:
-                console.log(`fatal error in func getDataSet: unrecognized table name \'${datasetName}\'`);
+                console.log(`fatal error in func insertRecord: unrecognized table name \'${datasetName}\'`);
         }
     },
 
@@ -61,15 +63,23 @@ module.exports =
     {
         switch (datasetName) {
             case 'caregivers':
-                await Caregiver.findByIdAndDelete(id);
+                await new Promise((resolve, reject) => {
+                    Caregiver.findByIdAndDelete(id, err => {
+                        if (err) { reject(err); }
+                        else { resolve(); }
+                    })
+                });
                 break;
-            
             case 'movies':
-                await Movie.findByIdAndDelete(id);
+                await new Promise((resolve, reject) => {
+                    Movie.findByIdAndDelete(id, err => {
+                        if (err) { reject(err); }
+                        else { resolve(); }
+                    })
+                });
                 break;
-
             default:
-                console.log(`fatal error in func getDataSet: unrecognized table name \'${datasetName}\'`);
+                console.log(`fatal error in func deleteRecord: unrecognized table name \'${datasetName}\'`);
         }
     },
 
@@ -77,21 +87,31 @@ module.exports =
     {
         switch (datasetName) {
             case 'caregivers':
-                await Caregiver.updateOne(
-                    { _id: id},
-                    {$set: record}
-                );
+                await new Promise((resolve, reject) => {
+                    Caregiver.updateOne(
+                        { _id: id },
+                        { $set: record },
+                        error => {
+                            if (err) { reject(err); }
+                            else { resolve(); }
+                        }
+                    )
+                });
                 break;
-            
             case 'movies':
-                await Movie.updateOne(
-                    { _id: id},
-                    {$set: record}
-                );
+                await new Promise((resolve, reject) => {
+                    Movie.updateOne(
+                        { _id: id },
+                        { $set: record },
+                        error => {
+                            if (err) { reject(err); }
+                            else { resolve(); }
+                        }
+                    )
+                });
                 break;
-
             default:
-                console.log(`fatal error in func getDataSet: unrecognized table name \'${datasetName}\'`);
+                console.log(`fatal error in func editRecord: unrecognized table name \'${datasetName}\'`);
         }
     },
 
@@ -100,21 +120,29 @@ module.exports =
         let result;
         switch (datasetName) {
             case 'caregivers':
-                await Caregiver.findById(id, (err, record) => {
-                    if (err) { console.log(err); }
-                    else { result = record; }
+                await new Promise((resolve, reject) => {
+                    Caregiver.findById(id, (err, record) => {
+                        if (err) { reject(err); }
+                        else { 
+                            result = record;
+                            resolve();
+                        }
+                    })
                 });
                 break;
-            
             case 'movies':
-                await Movie.findById(id, (err, record) => {
-                    if (err) { console.log(err); }
-                    else { result = record; }
-                })
+                await new Promise((resolve, reject) => {
+                    Movie.findById(id, (err, record) => {
+                        if (err) { reject(err); }
+                        else { 
+                            result = record;
+                            resolve();
+                        }
+                    })
+                });
                 break;
-
             default:
-                console.log(`fatal error in func getDataSet: unrecognized table name \'${datasetName}\'`);
+                console.log(`fatal error in func getRecord: unrecognized table name \'${datasetName}\'`);
         }
         return result;
     },
@@ -122,35 +150,36 @@ module.exports =
     getDataSet: async function(name) 
     {
         let dataset = {};
-        
         switch (name) {
             case 'caregivers':
-                await Caregiver.find({}, (err, caregiverDataset) => {
-                    if (err) { console.log(err); }
-                    else {
-                        dataset.name = name;
-                        dataset.headers = caregiverHeaders;
-                        dataset.data = caregiverDataset;
-                    }
+                await new Promise((resolve, reject) => {
+                    Caregiver.find({}, (err, caregiverDataset) => {
+                        if (err) { reject(err); }
+                        else {
+                            dataset.headers = caregiverHeaders;
+                            dataset.data = caregiverDataset;
+                            resolve();
+                        }
+                    });
                 });
                 break;
-            
             case 'movies':
-                await Movie.find({}, (err, movieDataset) => {
-                    if (err) { console.log(err); }
-                    else {
-                        dataset.name = name;
-                        dataset.headers = movieHeaders;
-                        dataset.data = movieDataset;
-                    }
+                await new Promise((resolve, reject) => {
+                    Movie.find({}, (err, movieDataset) => {
+                        if (err) { reject(err); }
+                        else {
+                            dataset.headers = movieHeaders;
+                            dataset.data = movieDataset;
+                            resolve();
+                        }
+                    })
                 });
                 break;
-
             default:
                 console.log(`fatal error in func getDataSet: unrecognized table name \'${name}\'`);
         }
         return dataset;
-    },
+    }
 };
 
 

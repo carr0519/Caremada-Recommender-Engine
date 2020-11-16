@@ -24,7 +24,6 @@ router.get("/insert/:datasetName", async (req, res) => {
 
 router.post("/insert/caregivers", async (req, res) => {
     await dataStore.insertRecord('caregivers', {
-        'Rank': req.body.Rank,
         'Name': req.body.Name,
         'Occupation': req.body.Occupation,
         'Genre': req.body.Genre,
@@ -39,7 +38,6 @@ router.post("/insert/caregivers", async (req, res) => {
 
 router.post("/insert/movies", async (req, res) => {
     await dataStore.insertRecord('movies', {
-        'Rank': req.body.Rank,
         'Title': req.body.Title,
         'Genre': req.body.Genre,
         'Description': req.body.Description,
@@ -58,18 +56,21 @@ router.post("/insert/movies", async (req, res) => {
 
 router.get("/dataset/:datasetName", async (req, res) => {
     const datasetName = req.params.datasetName;
-    const dataset = await dataStore.getDataSet(datasetName);
-    res.render("dataset", {
-        datasetName: datasetName,
-        headers: dataset.headers,
-        dataset: dataset.data
-    });
+    dataStore.getDataSet(datasetName)
+        .then(dataset => {
+            res.render("dataset", {
+            datasetName: datasetName,
+            headers: dataset.headers,
+            dataset: dataset.data
+            });
+        })
 });
 
 router.get("/recommendation/:datasetName/:key", async (req, res) => {
   const key = req.params.key;
   const datasetName = req.params.datasetName;
   const dataset = await dataStore.getDataSet(datasetName);
+  const record = await dataStore.getRecord(datasetName, key);
   let recommendations = [];
 
   const recommenderEngine = spawn("python", ['../Python/API.py', 'content', key, '_id', datasetName]);
@@ -82,6 +83,7 @@ router.get("/recommendation/:datasetName/:key", async (req, res) => {
 
   recommenderEngine.on("close", (code) => {
     res.render("recommendations", {
+        record: record,
         datasetName: datasetName,
         headers: dataset.headers,
         dataset: recommendations
@@ -101,7 +103,6 @@ router.get("/edit/:datasetName/:key", async (req, res) => {
 
 router.post("/edit/caregivers", async (req, res) => {
     await dataStore.editRecord('caregivers', req.body._id, {
-        'Rank': req.body.Rank,
         'Name': req.body.Name,
         'Occupation': req.body.Occupation,
         'Genre': req.body.Genre,
@@ -116,7 +117,6 @@ router.post("/edit/caregivers", async (req, res) => {
 
 router.post("/edit/movies", async (req, res) => {
     await dataStore.editRecord('movies', req.body._id, {
-        'Rank': req.body.Rank,
         'Title': req.body.Title,
         'Genre': req.body.Genre,
         'Description': req.body.Description,
