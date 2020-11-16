@@ -1,29 +1,48 @@
 import sys
-import json
-import pandas as pd
+from json import loads, dumps
 from pprint import pprint
-from bson.json_util import dumps
 from pymongo import MongoClient
-from bson.json_util import dumps
-import pandas as pd
-from pandas import DataFrame
 from machine_learning.content_based.content_based import ContentBased
+from pandas import Series, DataFrame
 
 def connectMongoDBLocal():
     pass
 
-
 if __name__ == "__main__":
     client = MongoClient('mongodb://localhost:27017/')
-    db = client['moviesDB']
-    collection = db['movies']
+    db = client['caremadaDB']
+    collection = []
+    filter_list = []
+
+    key = sys.argv[2]
+    prim_key = sys.argv[3]
+
+    if sys.argv[4] == "movies":
+        collection = db['movies']
+        filter_list = [prim_key, "Title", "Genre", "Director", "Actors"]
+    else:
+        collection = db['caregivers']
+        filter_list = [prim_key, "Name", "Occupation", "Services", "Availability", "Location"]
 
     result = collection.find()
     df = DataFrame(list(result))
+    cb = ContentBased(key, df, filter_list).filter()
 
-    cb = ContentBased(sys.argv[2], df, filter_list=["Title", "Genre", "Director", "Actors"]).filter()
+    for e in cb[:10]:
+        print(e.to_json())
 
-    print(dumps(list(cb[:10])))
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
