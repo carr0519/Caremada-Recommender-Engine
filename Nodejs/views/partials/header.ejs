@@ -6,50 +6,56 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Caremada Front End</title>
+  <title>Caremada Development</title>
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-
-  <style>
-  #searchbar {
-    width:800px;
-  }
-  </style>
 </head>
 
-<body>
+<body class="p-3 bg-dark text-white">
 
-  <div class="bg-secondary text-white" >
+  <header class="navbar">
+    <img class ="p-3" src="/images/logo-white-40.png">
+    <form class="p-3 form-inline mr-auto">
+      <input class="form-control" style="width:800px" id="searchbar" onkeyup="<>" type="text" name= "search" placeholder="Search...">
+        <button class ="btn btn-secondary btn-rounded btn-sm my-0 ml-sm-2" type="submit">Search</button>
+    </form>
+  </header>
 
-    <header class="navbar p-3 bg-dark text-white">
-      <img class ="p-3" src="/images/logo-white-40.png" >
-        <form class="p-3 form-inline mr-auto">       
-          <input class="form-control" id="searchbar" onkeyup="filterSearch()" type="text"
-           placeholder="Search for names ...">
-           <i class="fas fa-search ml-3" aria-hidden="true"></i>
-          <!-- <button class ="btn btn-secondary btn-rounded btn-sm my-0 ml-sm-2" type="submit">Search</button> -->
-        </form>
-      <!-- TODO this will be dynamic -->
-      <h5>Welcome User1 </h5>
-    </header>
+  <div class="container-fluid p-3 mb-2">
+    <div class="dropright">
 
-    <div class="container-fluid p-3 mb-2 bg-dark text-white ">
-      <button type="button" class="btn btn-secondary">View Caregiver database</button>
-      <button type="button" class="btn btn-secondary">View Patient database</button>
-      <div class="btn-group">
-        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">
-           other
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          DataSet
         </button>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="#">other</a>
-          <a class="dropdown-item" href="#">other</a>
+
+        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+          <h4 class="dropdown-header">Display</h4>
+          <form class="" action="/dataset/movies" method="get">
+            <button class="dropdown-item" type="submit" value="" class="btn btn-secondary">Movies</button>
+          </form>
+          <form class="" action="/dataset/caregivers" method="get">
+            <button class="dropdown-item" type="submit" value="" class="btn btn-secondary">Caregivers</button>
+          </form>
+          <div class="dropdown-divider"></div>
+          <h4 class="dropdown-header">Insert</h4>
+          <form class="" action="/insert/movies" method="get">
+            <button class="dropdown-item" type="submit" value="" class="btn btn-secondary">Movies</button>
+          </form>
+          <form class="" action="/insert/caregivers" method="get">
+            <button class="dropdown-item" type="submit" value="" class="btn btn-secondary">Caregivers</button>
+          </form>
+          <div class="dropdown-divider"></div>
+          <h4 class="dropdown-header">Reload</h4>
+          <form class="" action="/reload/movies" method="get">
+            <button class="dropdown-item" type="submit" value="" class="btn btn-secondary">Movies</button>
+          </form>
+          <form class="" action="/reload/caregivers" method="get">
+            <button class="dropdown-item" type="submit" value="" class="btn btn-secondary">Caregivers</button>
+          </form>
         </div>
+
       </div>
-      <a class=" float-right nav-link active" href="#">Logout</a>
-    </div>
-    
