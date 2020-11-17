@@ -1,97 +1,171 @@
     <!--TODO id and for attributes will need to be changed-->
     <div class="col-sm-1 border">
-        <h4>Filter</h4>
-        <div class="btn-group">
-          <button type="button" class="btn btn-info dropdown-toggle m-1" data-toggle="dropdown">
-            Genre
-          </button>
-          <div class="dropdown-menu p-3">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="actionCheck">
-              <label class="form-check-label" for="actionCheck">
-                Action
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="adventCheck">
-              <label class="form-check-label" for="adventCheck">
-                Adventure
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="sciCheck">
-              <label class="form-check-label" for="SciCheck">
-                Sci-Fi
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="thrillerCheck">
-              <label class="form-check-label" for="thrillerCheck">
-                Thriller
-              </label>
-            </div>
-          </div>      <!--End of Genre dropdown-menu-->
-        </div>     <!--End of Genre btn-group-->
-        <div class="btn-group">
-          <button type="button" class="btn btn-info dropdown-toggle m-1" data-toggle="dropdown">
-            Rating
-          </button>
-          <div class="dropdown-menu p-3">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="Rating1-3Check">
-              <label class="form-check-label" for="Rating1-3Check">
-                1.0 - 3.0
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="Rating3-5Check">
-              <label class="form-check-label" for="Rating3-5Check">
-                3.1 - 5.0
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="Rating5-7Check">
-              <label class="form-check-label" for="Rating5-7Check">
-                5.1 - 7.0
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="Rating7-1Check">
-              <label class="form-check-label" for="Rating7-1Check">
-                7.1 - 10.0
-              </label>
-            </div>
+      <h4 class="p-3">Filter</h4>
+      <div class="btn-group">
+        <button type="button" class="btn btn-info dropdown-toggle m-1" data-toggle="dropdown">
+          Genre
+        </button>
+        <div class="dropdown-menu p-3">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="Action" onclick="filter('Action')">  
+          <label class="form-check-label" for="Action">
+              Action
+            </label>
           </div>
-        </div> <!-- End of Rating btn-group-->
-        <div class="btn-group">
-          <button type="button" class="btn btn-info dropdown-toggle m-1" data-toggle="dropdown">
-            Metascore
-          </button>
-          <div class="dropdown-menu p-3">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="Meta0-30Check">
-              <label class="form-check-label" for="Meta0-30Check">
-                10 - 30
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="Meta3-5Check">
-              <label class="form-check-label" for="Meta3-5Check">
-                31 - 50
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="Meta5-7Check">
-              <label class="form-check-label" for="Meta5-7Check">
-                51 - 70
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="Meta7-1Check">
-              <label class="form-check-label" for="Meta7-1Check">
-                71 - 100
-              </label>
-            </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="Adventure" onclick="filter('Adventure')">
+          <label class="form-check-label" for="Adventure">
+              Adventure
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="Sci-Fi" onclick="filter('Sci-Fi')">
+          <label class="form-check-label" for="Sci-Fi">
+              Sci-Fi
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="Thriller" onclick="filter('Thriller')">
+          <label class="form-check-label" for="Thriller">
+              Thriller
+            </label>
+          </div>
+        </div>      <!--End of Genre dropdown-menu-->
+      </div>     <!--End of Genre btn-group-->
+      <div class="btn-group">
+        <button type="button" class="btn btn-info dropdown-toggle m-1" data-toggle="dropdown">
+          Rating
+        </button>
+        <div class="dropdown-menu p-3">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="1.0-3.0" onclick="filterRating('1.0-3.0','rating')">
+            <label class="form-check-label" for="1.0-3.0">
+              1.0 - 3.0
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="3.1-5.0" onclick="filterRating('3.1-5.0','rating')">
+            <label class="form-check-label" for="3.1-5.0">
+              3.1 - 5.0
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="5.1-7.0" onclick="filterRating('5.1-7.0','rating')">
+            <label class="form-check-label" for="5.1-7.0">
+              5.1 - 7.0
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="7.1-10.0" onclick="filterRating('7.1-10.0','rating')">
+            <label class="form-check-label" for="Rating7-1Check">
+              7.1 - 10.0
+            </label>
           </div>
         </div>
-      </div> <!--End of filter menus column-->
+      </div> <!-- End of Rating btn-group-->
+      <div class="btn-group">
+        <button type="button" class="btn btn-info dropdown-toggle m-1" data-toggle="dropdown">
+          Metascore
+        </button>
+        <div class="dropdown-menu p-3">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="10-30" onclick="filterRating('10-30','meta')">
+          <label class="form-check-label" for="10-30">
+              10 - 30
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="31-50" onclick="filterRating('31-50','meta')">
+          <label class="form-check-label" for="31-50">
+              31 - 50
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="51-70" onclick="filterRating('51-70','meta')">
+          <label class="form-check-label" for="51-70">
+              51 - 70
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="71-100" onclick="filterRating('71-100','meta')">
+          <label class="form-check-label" for="71-100">
+              71 - 100
+            </label>
+          </div>
+        </div>
+      </div>
+    </div> <!--End of filter menus column-->
+    <script>
+
+      function filter(checkboxElem){
+        const length = <%= dataset.length %>;
+        const checkbox = document.getElementById('checkboxElem');
+
+        if(document.getElementById(checkboxElem).checked){
+          for(let i =0; i < length; i++) {
+              var row = document.getElementById('row'+i);
+              //TODO change genre
+              var item = document.getElementById('Genre'+i);
+            if(!item.textContent.includes(checkboxElem)){
+              document.getElementById('row'+i).style.display = 'none';
+            }
+          }
+        }else{
+          for (let i = 0; i < length; i++) {
+            document.getElementById('row'+i).style.display = 'table-row';
+          }
+        }
+      }
+
+      function filterRating(checkboxElem,col){
+        const length = <%= dataset.length %>;
+        const checkbox = document.getElementById('checkboxElem');
+        var ratingCheck = checkboxElem.split("-");
+        var min = parseFloat(ratingCheck[0]);
+        var max = parseFloat(ratingCheck[1]);
+        if(document.getElementById(checkboxElem).checked){
+          for(let i =0; i < length; i++) {
+            var row = document.getElementById('row'+i);
+            
+            if(col == 'meta'){
+              var item = document.getElementById('Metascore'+i);
+            }else if(col == 'rating'){
+              var item = document.getElementById('Rating'+i);
+            }
+            //rating of current item
+            var itemRating = parseFloat(item.textContent);
+            //dont display items without rating
+            if(Number.isNaN(itemRating)){
+              document.getElementById('row'+i).style.display = 'none';
+            }
+            else if(!(itemRating >= min && itemRating <= max)){
+              document.getElementById('row'+i).style.display = 'none';
+            }
+         }
+        }else{
+          for (let i = 0; i < length; i++) {
+            document.getElementById('row'+i).style.display = 'table-row';
+          }
+        }
+      }
+
+      function filterSearch(){
+        var filter;
+        const length = <%= dataset.length %>;
+        const searchItem = document.getElementById('searchbar');
+        filter = searchItem.value;
+        for(let i=0; i < length; i++){
+          var row = document.getElementById('row'+i);
+          var item = document.getElementById('Title'+i);
+          if(!item.textContent.includes(filter)){
+            document.getElementById('row'+i).style.display = 'none';
+          }
+          else{
+            document.getElementById('row'+i).style.display = 'table-row';
+          }
+        }  
+      }     
+      
+
+
+    </script>
