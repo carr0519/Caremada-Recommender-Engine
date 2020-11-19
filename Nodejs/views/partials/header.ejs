@@ -13,58 +13,51 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-  <style>
-    #searchbar {
-      width:800px;
-    }
-  </style>
-  
 </head>
 
 <body class="p-3 bg-dark text-white">
-
   <header class="navbar">
-    <img class ="p-3" src="/images/logo-white-40.png">
-    <form class="p-3 form-inline mr-auto">       
-      <input class="form-control" id="searchbar" onkeyup="filterSearch()" type="text"
-       placeholder="Search for names ...">
-       <i class="fas fa-search ml-3" aria-hidden="true"></i>
-      <!-- <button class ="btn btn-secondary btn-rounded btn-sm my-0 ml-sm-2" type="submit">Search</button> -->
-    </form>
+    <img class="p-3" src="/images/logo-white-40.png">
+    <!-- <form class="p-3 form-inline mr-auto">
+      <input class="form-control" id="searchbar" onkeyup="filterSearch()" type="text" placeholder="Search">
+      <i class="fas fa-search ml-3" aria-hidden="true"></i>
+    </form> -->
   </header>
 
-  <div class="container-fluid p-3 mb-2">
-    <div class="dropright">
-
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          DataSet
-        </button>
-
-        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-          <h4 class="dropdown-header">Display</h4>
-          <form class="" action="/dataset/movies" method="get">
-            <button class="dropdown-item" type="submit" value="" class="btn btn-secondary">Movies</button>
-          </form>
-          <form class="" action="/dataset/caregivers" method="get">
-            <button class="dropdown-item" type="submit" value="" class="btn btn-secondary">Caregivers</button>
-          </form>
-          <div class="dropdown-divider"></div>
-          <h4 class="dropdown-header">Insert</h4>
-          <form class="" action="/insert/movies" method="get">
-            <button class="dropdown-item" type="submit" value="" class="btn btn-secondary">Movies</button>
-          </form>
-          <form class="" action="/insert/caregivers" method="get">
-            <button class="dropdown-item" type="submit" value="" class="btn btn-secondary">Caregivers</button>
-          </form>
-          <div class="dropdown-divider"></div>
-          <h4 class="dropdown-header">Reload</h4>
-          <form class="" action="/reload/movies" method="get">
-            <button class="dropdown-item" type="submit" value="" class="btn btn-secondary">Movies</button>
-          </form>
-          <form class="" action="/reload/caregivers" method="get">
-            <button class="dropdown-item" type="submit" value="" class="btn btn-secondary">Caregivers</button>
-          </form>
-        </div>
-
+  <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item dropdown active">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Movies
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="/display/movies">Display</a>
+              <a class="dropdown-item" href="/insert/movies">Insert</a>
+              <a class="dropdown-item" href="/reload/movies">Reload</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown active">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Caregviers
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="/display/caregivers">Display</a>
+              <a class="dropdown-item" href="/insert/caregivers">Insert</a>
+              <a class="dropdown-item" href="/reload/caregivers">Reload</a>
+            </div>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <i class="fas fa-search ml-3" aria-hidden="true"></i>
+          <!-- <button class="btn btn-light" type="submit">Search</button> -->
+        </form>
       </div>
+    </nav>

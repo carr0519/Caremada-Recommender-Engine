@@ -2,10 +2,9 @@ const mongoose = require("mongoose");
 const csvtojson = require("csvtojson");
 
 // mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true }, () => console.log('connected to DB'));
-mongoose.connect("mongodb://localhost:27017/caremadaDB", { useNewUrlParser: true, useUnifiedTopology: true });
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', () => console.log("Connected to MongoDB server."));
+// mongoose.connect("mongodb://localhost:27017/caremadaDB", { useNewUrlParser: true, useUnifiedTopology: true });
+const uri = "mongodb+srv://admin-alex:caremada6@cluster0.5inmr.mongodb.net/caremadaDB?retryWrites=true&w=majority"
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }, () => console.log("Connected to MongoDB server."));
 
 const Movie = require('../models/Movie.js').model;
 const movieHeaders = require('../models/Movie.js').headers;
@@ -67,7 +66,7 @@ module.exports =
                     Caregiver.findByIdAndDelete(id, err => {
                         if (err) { reject(err); }
                         else { resolve(); }
-                    })
+                    });
                 });
                 break;
             case 'movies':
@@ -75,7 +74,7 @@ module.exports =
                     Movie.findByIdAndDelete(id, err => {
                         if (err) { reject(err); }
                         else { resolve(); }
-                    })
+                    });
                 });
                 break;
             default:
@@ -91,11 +90,11 @@ module.exports =
                     Caregiver.updateOne(
                         { _id: id },
                         { $set: record },
-                        error => {
+                        err => {
                             if (err) { reject(err); }
                             else { resolve(); }
                         }
-                    )
+                    );
                 });
                 break;
             case 'movies':
@@ -103,11 +102,11 @@ module.exports =
                     Movie.updateOne(
                         { _id: id },
                         { $set: record },
-                        error => {
+                        err => {
                             if (err) { reject(err); }
                             else { resolve(); }
                         }
-                    )
+                    );
                 });
                 break;
             default:
@@ -127,7 +126,7 @@ module.exports =
                             result = record;
                             resolve();
                         }
-                    })
+                    });
                 });
                 break;
             case 'movies':
@@ -138,7 +137,7 @@ module.exports =
                             result = record;
                             resolve();
                         }
-                    })
+                    });
                 });
                 break;
             default:
@@ -147,10 +146,10 @@ module.exports =
         return result;
     },
 
-    getDataSet: async function(name) 
+    getDataSet: async function(datasetName) 
     {
         let dataset = {};
-        switch (name) {
+        switch (datasetName) {
             case 'caregivers':
                 await new Promise((resolve, reject) => {
                     Caregiver.find({}, (err, caregiverDataset) => {
@@ -172,7 +171,7 @@ module.exports =
                             dataset.data = movieDataset;
                             resolve();
                         }
-                    })
+                    });
                 });
                 break;
             default:

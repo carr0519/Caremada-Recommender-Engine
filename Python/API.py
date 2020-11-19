@@ -1,15 +1,14 @@
 import sys
-from json import loads, dumps
-from pprint import pprint
 from pymongo import MongoClient
 from machine_learning.content_based.content_based import ContentBased
-from pandas import Series, DataFrame
+from pandas import DataFrame
 
 def connectMongoDBLocal():
     pass
 
+
 if __name__ == "__main__":
-    client = MongoClient('mongodb://localhost:27017/')
+    client = MongoClient('mongodb+srv://admin-alex:caremada6@cluster0.5inmr.mongodb.net/caremadaDB?retryWrites=true&w=majority')
     db = client['caremadaDB']
     collection = []
     filter_list = []

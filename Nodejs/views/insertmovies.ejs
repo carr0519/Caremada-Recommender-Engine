@@ -5,12 +5,7 @@
   <h2>Insert Movie Record</h2><br><br>
 
   <form class="" action="/insert/movies" method="post">
-    
-    <div class="form-group">
-      <label for="Rank">Rank</label>
-      <input type="text" id="Rank" name="Rank" class="form-control" required>
-    </div>
-
+  
     <div class="form-group">
       <label for="Title">Title</label>
       <input type="text" id="Title" name="Title" class="form-control" required>
@@ -34,42 +29,42 @@
     <div class="form-group">
       <label for="Actors">Actors</label>
       <input type="text" id="Actors" name="Actors" class="form-control" required>
-    </div><br>
+    </div>
 
     <div class="form-group">
       <label for="Year">Year</label>
-      <input type="number" id="Year" name="Year" class="form-control" required>
-    </div><br>
+      <input type="number" min="1" step="1" id="Year" name="Year" class="form-control" required>
+    </div>
 
     <div class="form-group">
       <label for="Runtime">Runtime (Minutes)</label>
-      <input type="number" id="Runtime" name="Runtime" class="form-control" required>
-    </div><br>
+      <input type="number" min="1" step="1" id="Runtime" name="Runtime" class="form-control" required>
+    </div>
 
     <div class="form-group">
       <label for="Rating">Rating</label>
-      <input type="number" id="Rating" name="Rating" class="form-control" required>
-    </div><br>
+      <input type="number" min="0" max="10" step="any" id="Rating" name="Rating" class="form-control" required>
+    </div>
 
     <div class="form-group">
       <label for="Votes">Votes</label>
-      <input type="number" id="Votes" name="Votes" class="form-control" required>
-    </div><br>
+      <input type="number" min="0" step="1" id="Votes" name="Votes" class="form-control" required>
+    </div>
 
     <div class="form-group">
       <label for="Revenue">Revenue (Millions)</label>
-      <input type="number" id="Revenue" name="Revenue" class="form-control" required>
-    </div><br>
+      <input type="number" min="0" step="any" id="Revenue" name="Revenue" class="form-control" required>
+    </div>
 
     <div class="form-group">
       <label for="Metascore">Metascore</label>
-      <input type="number" id="Metascore" name="Metascore" class="form-control" required>
-    </div><br>
+      <input type="number" mnin="0" max="100" step="1" id="Metascore" name="Metascore" class="form-control" required>
+    </div>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <br>
+    <button type="submit" class="btn btn-light" style="color:black">Submit</button>
   </form>
 
-  <br><br><br>
 </div>
 
 <%- include('partials/footer') %>

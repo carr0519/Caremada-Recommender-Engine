@@ -44,30 +44,4 @@
   </div>
 </div>
 
-<script>
-
-  const checkbox = document.getElementById('actionCheck')
-  const length = <%= dataset.length %>;
-  
-  checkbox.addEventListener('change', (event) => {
-    if (event.target.checked) {
-      for (let i = 0; i < length; i++) {
-        if (i % 2 == 0) {
-          document.getElementById('row'+i).style.display = 'none';
-          //document.getElementById('test').innerHTML = checkbox.value;
-        }
-      }
-    } else {
-      for (let i = 0; i < length; i++) {
-        if (i % 2 == 0) {
-          document.getElementById('row'+i).style.display = 'table-row';
-        }
-      }
-    }
-  })
-
-</script>
-
-
-
   <%- include('partials/footer') %>
