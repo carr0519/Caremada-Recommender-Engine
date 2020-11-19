@@ -3,19 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="d6a1cc2c-a051-40e7-95a1-e679d2355bd5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../Nodejs/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Nodejs/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Nodejs/models/Movie.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Nodejs/models/Movie.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Nodejs/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Nodejs/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Nodejs/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Nodejs/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Nodejs/routes/movieRouter.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Nodejs/routes/userRouter.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Nodejs/views/home.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../Nodejs/views/home.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Nodejs/views/login.ejs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../Nodejs/views/partials/footer.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../Nodejs/views/partials/footer.ejs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Nodejs/views/partials/header.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../Nodejs/views/partials/header.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Nodejs/views/register.ejs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Nodejs/views/recommendations.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../Nodejs/views/recommendations.ejs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/API.py" beforeDir="false" afterPath="$PROJECT_DIR$/API.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/machine_learning/content_based/content_based.py" beforeDir="false" afterPath="$PROJECT_DIR$/machine_learning/content_based/content_based.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -166,26 +158,26 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1921" height="170" key="GridCell.Tab.0.bottom" timestamp="1605246139731">
+    <state width="1921" height="300" key="GridCell.Tab.0.bottom" timestamp="1605745955753">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1921" height="298" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1605114800464" />
-    <state width="1921" height="170" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1605246139731" />
-    <state width="1921" height="170" key="GridCell.Tab.0.center" timestamp="1605246139731">
+    <state width="1921" height="300" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1605745955753" />
+    <state width="1921" height="300" key="GridCell.Tab.0.center" timestamp="1605745955753">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1921" height="298" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1605114800463" />
-    <state width="1921" height="170" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1605246139731" />
-    <state width="1921" height="170" key="GridCell.Tab.0.left" timestamp="1605246139731">
+    <state width="1921" height="300" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1605745955753" />
+    <state width="1921" height="300" key="GridCell.Tab.0.left" timestamp="1605745955753">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1921" height="298" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1605114800463" />
-    <state width="1921" height="170" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1605246139731" />
-    <state width="1921" height="170" key="GridCell.Tab.0.right" timestamp="1605246139731">
+    <state width="1921" height="300" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1605745955753" />
+    <state width="1921" height="300" key="GridCell.Tab.0.right" timestamp="1605745955753">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1921" height="298" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1605114800464" />
-    <state width="1921" height="170" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1605246139731" />
+    <state width="1921" height="300" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1605745955753" />
     <state width="1921" height="97" key="GridCell.Tab.1.bottom" timestamp="1605070744128">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -207,11 +199,11 @@
     </state>
     <state x="461" y="162" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1605058905649" />
     <state x="2381" y="162" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1601557502258" />
-    <state x="2576" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1605283163719">
+    <state x="2576" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1605741770002">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="656" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1605215237190" />
-    <state x="2576" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1605283163719" />
+    <state x="2576" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1605741770002" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1601313897291">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
