@@ -15,5 +15,9 @@ const movieSchema = new mongoose.Schema({
 });
 
 let headers = Object.keys(movieSchema.paths);
-module.exports.model = mongoose.model('Movie', movieSchema);
-module.exports.headers = headers;
+let model = mongoose.model('Movie', movieSchema);
+
+module.exports = {
+  headers,
+  model
+}

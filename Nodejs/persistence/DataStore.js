@@ -1,184 +1,79 @@
 const mongoose = require("mongoose");
 const csvtojson = require("csvtojson");
 
-// mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true }, () => console.log('connected to DB'));
-// mongoose.connect("mongodb://localhost:27017/caremadaDB", { useNewUrlParser: true, useUnifiedTopology: true });
+// const uri = "process.env.DB_CONNECTION";
+// const uri = "mongodb://localhost:27017/caremadaDB";
 const uri = "mongodb+srv://admin-alex:caremada6@cluster0.5inmr.mongodb.net/caremadaDB?retryWrites=true&w=majority"
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }, () => console.log("Connected to MongoDB server."));
 
-const Movie = require('../models/Movie.js').model;
-const movieHeaders = require('../models/Movie.js').headers;
+const Movie = require('../models/Movie.js')
+const Caregiver = require('../models/Caregivers.js')
 
-const Caregiver = require('../models/Caregivers.js').model;
-const caregiverHeaders = require('../models/Caregivers.js').headers;
 
-module.exports = 
-{
-    reloadDataset: async function(datasetName)
-    {
-        switch (datasetName) {
-            case 'caregivers':
-                await new Promise((resolve, reject) => {
-                    Caregiver.deleteMany({}, err => {
-                        if (err) { reject(err); }
-                        else { resolve(); }
-                    });
-                });
-                await csvtojson()
-                    .fromFile(__dirname + "/Mock_Caremada.csv")
-                    .then(csvData => Caregiver.create(csvData));
-                break;
-            case 'movies':
-                await new Promise((resolve, reject) => {
-                    Movie.deleteMany({}, err => {
-                        if (err) { reject(err); }
-                        else { resolve(); }
-                    });
-                });
-                await csvtojson()
-                    .fromFile(__dirname + "/sample_movie_dataset.csv")
-                    .then(csvData => Movie.create(csvData));
-                break;
-            default:
-                console.log(`fatal error in func reloadDataSet: unrecognized table name \'${datasetName}\'`);
-        }
-    },
-
-    insertRecord: async function(datasetName, record) 
-    {
-        switch (datasetName) {
-            case 'caregivers':
-                await Caregiver.create(record);
-                break;
-            case 'movies':
-                await Movie.create(record);
-                break;
-            default:
-                console.log(`fatal error in func insertRecord: unrecognized table name \'${datasetName}\'`);
-        }
-    },
-
-    deleteRecord: async function(datasetName, id)
-    {
-        switch (datasetName) {
-            case 'caregivers':
-                await new Promise((resolve, reject) => {
-                    Caregiver.findByIdAndDelete(id, err => {
-                        if (err) { reject(err); }
-                        else { resolve(); }
-                    });
-                });
-                break;
-            case 'movies':
-                await new Promise((resolve, reject) => {
-                    Movie.findByIdAndDelete(id, err => {
-                        if (err) { reject(err); }
-                        else { resolve(); }
-                    });
-                });
-                break;
-            default:
-                console.log(`fatal error in func deleteRecord: unrecognized table name \'${datasetName}\'`);
-        }
-    },
-
-    editRecord: async function(datasetName, id, record) 
-    {
-        switch (datasetName) {
-            case 'caregivers':
-                await new Promise((resolve, reject) => {
-                    Caregiver.updateOne(
-                        { _id: id },
-                        { $set: record },
-                        err => {
-                            if (err) { reject(err); }
-                            else { resolve(); }
-                        }
-                    );
-                });
-                break;
-            case 'movies':
-                await new Promise((resolve, reject) => {
-                    Movie.updateOne(
-                        { _id: id },
-                        { $set: record },
-                        err => {
-                            if (err) { reject(err); }
-                            else { resolve(); }
-                        }
-                    );
-                });
-                break;
-            default:
-                console.log(`fatal error in func editRecord: unrecognized table name \'${datasetName}\'`);
-        }
-    },
-
-    getRecord: async function(datasetName, id) 
-    {
-        let result;
-        switch (datasetName) {
-            case 'caregivers':
-                await new Promise((resolve, reject) => {
-                    Caregiver.findById(id, (err, record) => {
-                        if (err) { reject(err); }
-                        else { 
-                            result = record;
-                            resolve();
-                        }
-                    });
-                });
-                break;
-            case 'movies':
-                await new Promise((resolve, reject) => {
-                    Movie.findById(id, (err, record) => {
-                        if (err) { reject(err); }
-                        else { 
-                            result = record;
-                            resolve();
-                        }
-                    });
-                });
-                break;
-            default:
-                console.log(`fatal error in func getRecord: unrecognized table name \'${datasetName}\'`);
-        }
-        return result;
-    },
-
-    getDataSet: async function(datasetName) 
-    {
-        let dataset = {};
-        switch (datasetName) {
-            case 'caregivers':
-                await new Promise((resolve, reject) => {
-                    Caregiver.find({}, (err, caregiverDataset) => {
-                        if (err) { reject(err); }
-                        else {
-                            dataset.headers = caregiverHeaders;
-                            dataset.data = caregiverDataset;
-                            resolve();
-                        }
-                    });
-                });
-                break;
-            case 'movies':
-                await new Promise((resolve, reject) => {
-                    Movie.find({}, (err, movieDataset) => {
-                        if (err) { reject(err); }
-                        else {
-                            dataset.headers = movieHeaders;
-                            dataset.data = movieDataset;
-                            resolve();
-                        }
-                    });
-                });
-                break;
-            default:
-                console.log(`fatal error in func getDataSet: unrecognized table name \'${name}\'`);
-        }
-        return dataset;
+function getModel(name) {
+    switch (name) {
+        case 'caregivers':
+            return Caregiver.model;
+        case 'movies':
+            return Movie.model;
     }
-};
+}
+
+function getHeaders(name) {
+    switch (name) {
+        case 'caregivers':
+            return Caregiver.headers;
+        case 'movies':
+            return Movie.headers;
+    }
+}
+
+function getCsvName(name) {
+    switch (name) {
+        case 'caregivers':
+            return "/Mock_Caremada.csv";
+        case 'movies':
+            return "/sample_movie_dataset.csv";
+    }
+}
+
+async function getDataSet(datasetName) {
+    return {
+        headers: getHeaders(datasetName),
+        data: await getModel(datasetName).find({}).exec()
+    }
+}
+
+async function reloadDataset(datasetName) {
+    model = getModel(datasetName);
+    await model.deleteMany({}).exec();
+    await csvtojson()
+        .fromFile(__dirname + getCsvName(datasetName))
+        .then(csvData => model.create(csvData));
+}
+
+async function getRecord(datasetName, id) {
+    return await getModel(datasetName).findById(id).exec();
+}
+
+async function insertRecord(datasetName, record) {
+    await getModel(datasetName).create(record);
+}
+
+async function editRecord(datasetName, id, record) {
+    await getModel(datasetName).updateOne({ _id: id }, { $set: record }).exec();
+}
+
+async function deleteRecord(datasetName, id) {
+    await getModel(datasetName).findByIdAndDelete(id).exec();
+}
 
 
+module.exports = {
+    getDataSet,
+    reloadDataset,
+    getRecord,
+    insertRecord,
+    editRecord,
+    deleteRecord
+}
