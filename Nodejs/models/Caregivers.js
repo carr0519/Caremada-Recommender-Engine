@@ -11,5 +11,9 @@ const caregiverSchema = new mongoose.Schema({
 });
 
 let headers = Object.keys(caregiverSchema.paths);
-module.exports.model = mongoose.model('Caregiver', caregiverSchema);
-module.exports.headers = headers;
+let model = mongoose.model('Caregiver', caregiverSchema);
+
+module.exports = {
+  headers,
+  model
+};
