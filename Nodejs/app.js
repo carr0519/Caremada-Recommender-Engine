@@ -12,3 +12,19 @@ app.use("/", router);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Server running on port ${port}`));
+
+
+// =====================================================
+//      Spawn Recommender Engine Web API
+// =====================================================
+const { spawn } = require("child_process");
+// const webAPI = spawn("python", ['../Python/web_API.py']);
+
+
+// var ip = require("ip");
+// console.dir ( ip.address() );
+
+process.on('SIGINT', (options, exitCode) => {
+    console.log('Exiting in Node');
+    webAPI.kill('SIGINT');
+});
