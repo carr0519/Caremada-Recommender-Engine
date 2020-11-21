@@ -40,13 +40,13 @@ function getCsvName(name) {
 async function getDataSet(datasetName) {
     return {
         headers: getHeaders(datasetName),
-        data: await getModel(datasetName).find({}).exec()
+        data: await getModel(datasetName).find().exec()
     }
 }
 
 async function reloadDataset(datasetName) {
-    model = getModel(datasetName);
-    await model.deleteMany({}).exec();
+    const model = getModel(datasetName);
+    await model.deleteMany().exec();
     await csvtojson()
         .fromFile(__dirname + getCsvName(datasetName))
         .then(csvData => model.create(csvData));
