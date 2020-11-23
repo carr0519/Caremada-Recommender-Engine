@@ -1,9 +1,8 @@
 const mongoose = require("mongoose");
 const csvtojson = require("csvtojson");
 
-// const uri = "process.env.DB_CONNECTION";
 // const uri = "mongodb://localhost:27017/caremadaDB";
-const uri = "mongodb+srv://admin-alex:caremada6@cluster0.5inmr.mongodb.net/caremadaDB?retryWrites=true&w=majority"
+const uri = process.env.DB_CONNECTION;
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }, () => console.log("Connected to MongoDB server."));
 
 const Movie = require('../models/Movie.js')
