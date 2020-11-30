@@ -43,15 +43,15 @@ router.get("/recommendation/:datasetName/:key", async (req, res) => {
     // ARG 3) PRIMARY KEY COLUMN NAME OF THE TABLE (_id for MongoDB)
     // ARG 4) NAME OF THE COLLECTION/TABLE/DATASET (MOVIES VS CAREGIVERS)
 
-    // var ip = require("ip");
-    // console.dir ( ip.address() );
+    var ip = require("ip");
+    //console.dir ( ip.address() );
 
     const ipAddr = "192.168.2.26"
     const net = require('net');
 
     const client = new net.Socket();
     client.connect(5050, ipAddr, () => {
-        console.log('Connected');
+        //console.log('Connected');
         client.write(JSON.stringify({
             "algorithm_t": "content",
             "tableName": datasetName,
@@ -62,12 +62,11 @@ router.get("/recommendation/:datasetName/:key", async (req, res) => {
 
     client.on('data', function (data) {
         recommendations = JSON.parse(data.toString())
-        console.log(recommendations);
         client.destroy(); // kill client after server's response
     });
 
     client.on('close', function () {
-        console.log('Connection closed');
+        //console.log('Connection closed');
         res.render("recommendations", {
             record: record,
             datasetName: datasetName,
@@ -178,6 +177,39 @@ router.post("/delete/:datasetName/:key", (req, res) => {
     const datasetName = req.params.datasetName;
     dataStore.deleteRecord(datasetName, key)
         .then(res.redirect("/display/" + datasetName));
+});
+
+
+router.get("/test/:datasetName/:key", async (req, res) => {
+    const key = req.params.key;
+    const datasetName = req.params.datasetName;
+    let recommendations = [];
+
+    var ip = require("ip");
+    console.dir ( ip.address() );
+
+    const ipAddr = "192.168.2.26"
+    const net = require('net');
+
+    const client = new net.Socket();
+    client.connect(5050, ipAddr, () => {
+        //console.log('Connected');
+        client.write(JSON.stringify({
+            "algorithm_t": "content",
+            "tableName": datasetName,
+            "pkey_column_name": "_id",
+            "pkey_val": key
+        }));
+    });
+
+    client.on('data', function (data) {
+        recommendations = JSON.parse(data.toString());
+        client.destroy(); // kill client after server's response
+    });
+
+    client.on('close', function () {
+        res.send(recommendations);
+    });
 });
 
 module.exports = router;
