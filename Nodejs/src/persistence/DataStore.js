@@ -1,9 +1,10 @@
 const mongoose = require("mongoose");
 const csvtojson = require("csvtojson");
 
-// const uri = "mongodb://localhost:27017/caremadaDB";
+//const uri = "mongodb://localhost:27017/caremadaDB";
 const uri = process.env.DB_CONNECTION;
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }, () => console.log("Connected to MongoDB server."));
+
 
 const Movie = require('../models/Movie.js')
 const Caregiver = require('../models/Caregivers.js')
@@ -74,5 +75,6 @@ module.exports = {
     getRecord,
     insertRecord,
     editRecord,
-    deleteRecord
+    deleteRecord,
+    db_connect: mongoose.connection
 }

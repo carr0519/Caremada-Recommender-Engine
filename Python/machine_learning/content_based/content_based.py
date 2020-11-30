@@ -1,37 +1,66 @@
-from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-from pandas import Series, DataFrame
+from pandas import Series
+"""A class that handles data and sorts by text similarity using cosine similarity.
 
+    This classes purposes is to sort the data based on cosine similarity
+    and provide utility functions to be used by the API. It also contains methods to generate 
+    statistical information.
+
+    Typical usage example:
+    cb = ContentBased("itemID", databaseTable, [featureOne, featureTwo, etc,])
+    RecommendationList = cb.getRecommendation(10)
+"""
 
 class ContentBased:
-    def __init__(self, selected_key, dataset, filter_list):
+    """Content-based classed to process the data, and provide recommendations. Uses Cosine Similarity.
+
+    This class takes intializes the the class atrributes with the provided data then calls
+    it's own method sort_frame() to process and sort the Dataframe data. The data is is maintained as a dataframe sorted by
+    cosine similarity with the lowest indexs being the most similar.
+
+    Attributes:
+        selected_key(string): The key which to generate recommendations for.
+        df(df/list): Dataframe to process.
+        selected_features(string): Features on which to execute text similarity algorithms.
+    """
+    def __init__(self, pkey_col, selected_key ,df, selected_features):
+        """Class intializer. Calls the sort_frame() function."""
         self.selected_key = selected_key
-        self.dataset = dataset
-        self.filter_list = filter_list
-        self.sorted_similar_movies = []
-        self.data_frame = None
+        self.selected_features = selected_features
+        self.sorted_df = df
+        self.pkey_col = pkey_col
+        self.sort_frame()
 
-    def filter(self):
-        df = {}
-        for filter in self.filter_list:
-            df[filter] = self.dataset[filter]
+    def sort_frame(self):
+        recommendation_index = None
 
-        self.data_frame = DataFrame(df)
-        self.data_frame['combined_features'] = self.data_frame[self.filter_list].apply(lambda x: str(x), axis=1)
-        cv = TfidfVectorizer(use_idf=False)
-        movie_index = None
-
-        # change self.data_frame._id to be dynamic
-        for key, index in zip(self.data_frame._id, self.data_frame.index):
+        for key, index in zip(self.sorted_df[self.pkey_col], self.sorted_df.index):
             if str(key) == self.selected_key:
-                movie_index = index
+                recommendation_index = index
 
-        count_matrix = cv.fit_transform(self.data_frame['combined_features'])
-        cosine_sim = cosine_similarity(count_matrix, count_matrix)
-        score_series = Series(cosine_sim[movie_index]).sort_values(ascending=False)
-        top_10 = list(score_series.iloc[1:11].index)
+        self.sorted_df['combined_features'] = self.sorted_df[self.selected_features].apply(lambda x: str(x), axis=1)
 
-        for i in top_10:
-            self.sorted_similar_movies.append(self.dataset.iloc[i][1:])
+        # vectorize and process cosine similarity and append to dataframe
+        cv = CountVectorizer()
+        count_matrix = cv.fit_transform(self.sorted_df["combined_features"])
+        cos_similarity = cosine_similarity(count_matrix)
+        score_series = Series(cos_similarity[recommendation_index])
+        self.sorted_df['Cosine Similarity'] = score_series
 
-        return self.sorted_similar_movies
+        self.sorted_df.sort_values(by=['Cosine Similarity'], inplace=True, ascending=False)
+
+
+
+    def get_recommendations(self, num_of_rec, sort_method=None):
+        df_for_api = self.sorted_df
+
+        if sort_method is not None:
+            df_for_api.sort_values(by=['Cosine Similarity', sort_method], inplace=True, ascending=False)
+
+        # Drop columns for aesthetics
+        df_for_api.drop(['combined_features'], axis=1, inplace=True)
+        df_for_api.drop(['Cosine Similarity'], axis=1, inplace=True)
+        df_for_api.drop([self.pkey_col], axis=1, inplace=True)  # hide primary key from the recommendations
+
+        return df_for_api.iloc[1:num_of_rec+1].fillna('').to_dict('records')
