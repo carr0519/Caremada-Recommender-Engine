@@ -26,7 +26,7 @@ const webAPI = spawn("python", ['../Python/web_API.py']);
 
 
 var ip = require("ip");
-console.dir ( ip.address() );
+//console.dir ( ip.address() );
 
 process.on('SIGINT', (options, exitCode) => {
     console.log('Exiting in Node');
