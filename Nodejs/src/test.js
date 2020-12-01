@@ -1,9 +1,7 @@
 require('./app')
+const { db_connect, getDataSet } = require('./persistence/DataStore')
 const http = require('http');
 const { expect } = require('chai');
-const _ = require('lodash');
-const dataStore = require('./persistence/DataStore')
-const { db_connect } = dataStore;
 
 
 function runTests() {
@@ -31,7 +29,7 @@ function runTests() {
 
         it("checks if we received an array of objects", async () => {
             expect(dataset).to.not.be.an.instanceof(Array);
-            dataset = (await dataStore.getDataSet("caregivers")).data;
+            dataset = (await getDataSet("caregivers")).data;
             expect(dataset).to.be.an.instanceof(Array);
             expect(dataset[0]).to.be.an.instanceof(Object);
         });
