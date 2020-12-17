@@ -1,17 +1,17 @@
 import unittest
 import pandas as pd
-from data.csv_file_handler import CsvFileHandler
+from archive.data.csv_file_handler import CsvFileHandler
 
 
 class TestCsvFileHandler(unittest.TestCase):
 
     def setUp(self):
-        self.movies = CsvFileHandler("..\\data", "sample_movie_dataset.csv")
-        self.user_profiles = CsvFileHandler("..\\data", "user_profile_logs.csv")
+        self.movies = CsvFileHandler("../archive/data", "sample_movie_dataset.csv")
+        self.user_profiles = CsvFileHandler("../archive/data", "user_profile_logs.csv")
 
     def test_constructor(self):
-        self.assertIsInstance(CsvFileHandler("..\\data", "sample_movie_dataset.csv"), CsvFileHandler)   # valid path and file
-        self.assertIsInstance(CsvFileHandler("..\\data", "user_profile_logs.csv"), CsvFileHandler)      # valid path and file
+        self.assertIsInstance(CsvFileHandler("../archive/data", "sample_movie_dataset.csv"), CsvFileHandler)   # valid path and file
+        self.assertIsInstance(CsvFileHandler("../archive/data", "user_profile_logs.csv"), CsvFileHandler)      # valid path and file
         self.assertRaises(ValueError, CsvFileHandler, "..\\data", "non_existent_file.csv")  # valid path, invalid file
         self.assertRaises(ValueError, CsvFileHandler, "none\\existent\\path", "sample_movie_dataset.csv") # invalid path, valid file
         self.assertRaises(ValueError, CsvFileHandler, "..\\data", "text_file.txt") # valid path and file but not a csv
