@@ -1,12 +1,12 @@
 import unittest
-from data.csv_file_handler import CsvFileHandler
+from archive.data.csv_file_handler import CsvFileHandler
 from machine_learning.content_based.content_based import ContentBased
 
 
 class TestContentBased(unittest.TestCase):
 
     def setUp(self):
-        self.movies = CsvFileHandler("..\\data", "sample_movie_dataset.csv")
+        self.movies = CsvFileHandler("../archive/data", "sample_movie_dataset.csv")
         self.movies.extract_data()
         self.movies_data_frame = self.movies.get_data_frame()
 

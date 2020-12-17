@@ -2,9 +2,10 @@ import socket
 import threading
 import json
 import atexit
-from pymongo import MongoClient
+import mysql.connector as sql_connector
 from machine_learning.content_based.content_based import ContentBased
 from pandas import DataFrame
+
 
 PORT = 5050
 HEADER = 4096  # BITS FOR THE MESSAGE
@@ -15,9 +16,13 @@ server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind(ADDR)
 FORMAT = 'utf-8'
 
-client = MongoClient('mongodb+srv://admin-alex:caremada6@cluster0.5inmr.mongodb.net/caremadaDB?retryWrites=true&w=majority')
-# client = MongoClient('mongodb://localhost:27017')
-db = client['caremadaDB']
+# Create a DB connection
+sql_connection = sql_connector.connect(user='user', password='pass', database='caremada')
+
+# Intialize a cursor to run SQL commands
+mycursor = sql_connection.cursor()
+
+
 collection = None
 filter_list = None
 
@@ -38,24 +43,32 @@ def handle_client(conn, addr):
     msg = conn.recv(HEADER).decode(FORMAT)
     json_msg = json.loads(msg)
 
-    print('abc')
     try:
         algorithm_t = json_msg['algorithm_t']
         table_name = json_msg['tableName']
         pkey_column_name = json_msg['pkey_column_name']
         pkey_val = json_msg['pkey_val']
 
-        if table_name == "movies":
-            collection = db['movies']
-            filter_list = ["Title", "Genre", "Director", "Actors"]
-        elif table_name == "caregivers":
-            collection = db['caregivers']
-            filter_list = ["Name", "Occupation", "Services", "Availability", "Location"]
 
-        dataset = list(collection.find())
-        df = DataFrame(dataset)
+        # dataset = list(collection.find())
+        # df = DataFrame(dataset)
 
-        cb = ContentBased(pkey_column_name, pkey_val, df, filter_list)
+        filter_list = ["official_occupation", "travel_radius"]
+        mycursor.execute("SELECT * FROM caregiver")
+
+        myresult = mycursor.fetchall()
+        mylist = myresult
+        mydf = DataFrame(mylist)
+        # print(mydf)
+
+        mycursor.execute("SELECT column_name FROM information_schema.columns WHERE table_name='caregiver';")
+        mycolumnnames = mycursor.fetchall()
+        my_col_list = list(mycolumnnames)
+        formatted_names = [''.join(i) for i in my_col_list] 
+        mydf.columns = formatted_names
+        print(mydf)
+
+        cb = ContentBased(pkey_column_name, pkey_val, mydf, filter_list)
         recommendations = cb.get_recommendations(10)
 
         conn.send(json.dumps(recommendations, default=str).encode(FORMAT))

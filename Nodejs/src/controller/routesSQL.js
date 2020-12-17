@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const net = require('net');
-const dataStore = require('../persistence/DataStore');
+const dataStore = require('../persistence/DataStoreSQL');
  
 var ip = require("ip");
 console.dir ( ip.address() );
@@ -11,20 +11,19 @@ router.get("/", (req, res) => {
 });
 
 router.get("/display/:datasetName", (req, res) => {
-    const datasetName = req.params.datasetName;
-    dataStore.getDataSet(datasetName)
+    dataStore.getDataSet()
         .then(dataset => {
             res.render("display", {
-                datasetName: datasetName,
+                datasetName: "caregivers",
                 headers: dataset.headers,
-                dataset: dataset.data
+                dataset: dataset.result
             });
+            //console.log(dataset.result);
         })
 });
 
 router.get("/reload/:datasetName", (req, res) => {
-    const datasetName = req.params.datasetName;
-    dataStore.reloadDataset(datasetName)
+    dataStore.reloadDataset()
         .then(() => res.redirect("/display/" + datasetName));
 });
 
@@ -32,8 +31,7 @@ router.get("/reload/:datasetName", (req, res) => {
 router.get("/recommendation/:datasetName/:key", async (req, res) => {
     const key = req.params.key;
     const datasetName = req.params.datasetName;
-    const dataset = await dataStore.getDataSet(datasetName);
-    const record = await dataStore.getRecord(datasetName, key);
+    const { headers, record } = await dataStore.getRecord(key);
     let recommendations = [];
 
     const client = new net.Socket();
@@ -41,7 +39,7 @@ router.get("/recommendation/:datasetName/:key", async (req, res) => {
         client.write(JSON.stringify({
             "algorithm_t": "content",
             "tableName": datasetName,
-            "pkey_column_name": "_id",
+            "pkey_column_name": headers[0],
             "pkey_val": key
         }));
     });
@@ -52,11 +50,10 @@ router.get("/recommendation/:datasetName/:key", async (req, res) => {
     });
 
     client.on('close', () => {
-        console.log(recommendations[0]);
         res.render("recommendations", {
             record: record,
             datasetName: datasetName,
-            headers: dataset.headers,
+            headers: headers,
             dataset: recommendations
         });
     });
@@ -67,22 +64,7 @@ router.get("/insert/:datasetName", (req, res) => {
     res.render("insert" + datasetName);
 });
 
-router.post("/insert/movies", (req, res) => {
-    dataStore.insertRecord('movies', {
-        'Title': req.body.Title,
-        'Genre': req.body.Genre,
-        'Description': req.body.Description,
-        'Director': req.body.Director,
-        'Actors': req.body.Actors,
-        'Year': req.body.Year,
-        'Runtime (Minutes)': req.body.Runtime,
-        'Rating': req.body.Rating,
-        'Votes': req.body.Votes,
-        'Revenue (Millions)': req.body.Revenue,
-        'Metascore': req.body.Metascore,
-    })
-        .then(res.redirect("/display/movies"));
-});
+
 
 router.post("/insert/caregivers", (req, res) => {
     dataStore.insertRecord('caregivers', {
@@ -101,31 +83,15 @@ router.post("/insert/caregivers", (req, res) => {
 
 router.get("/edit/:datasetName/:key", (req, res) => {
     const key = req.params.key;
-    const datasetName = req.params.datasetName;
-    dataStore.getRecord(datasetName, key)
-        .then(editRecord =>
-            res.render("edit" + datasetName, {
-                datasetName: datasetName,
-                record: editRecord
-            }))
+    dataStore.getRecord(key)
+        .then(result => {
+            res.render("editcaregivers", {
+                datasetName: "caregivers",
+                headers: result.headers,
+                record: result.record
+        })})
 });
 
-router.post("/edit/movies", (req, res) => {
-    dataStore.editRecord('movies', req.body._id, {
-        'Title': req.body.Title,
-        'Genre': req.body.Genre,
-        'Description': req.body.Description,
-        'Director': req.body.Director,
-        'Actors': req.body.Actors,
-        'Year': req.body.Year,
-        'Runtime (Minutes)': req.body.Runtime,
-        'Rating': req.body.Rating,
-        'Votes': req.body.Votes,
-        'Revenue (Millions)': req.body.Revenue,
-        'Metascore': req.body.Metascore,
-    })
-        .then(res.redirect("/display/movies"));
-});
 
 router.post("/edit/caregivers", (req, res) => {
     dataStore.editRecord('caregivers', req.body._id, {

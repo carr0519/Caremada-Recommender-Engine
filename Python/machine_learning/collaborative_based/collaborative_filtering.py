@@ -1,4 +1,4 @@
-from pandas import DataFrame, merge, Series
+from pandas import DataFrame, Series
 import numpy as np
 
 
@@ -38,7 +38,7 @@ class CollaborativeBased:
         return True
 
     def movie_listing(self, top_10):
-        from driver.engine import get_datagram
+        from archive.driver import get_datagram
 
         path_movies_csv = "..\\data"
         file_movies_csv = "sample_movie_dataset.csv"

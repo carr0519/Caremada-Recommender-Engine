@@ -1,13 +1,11 @@
 import csv
 import sys
 
-from driver.engine import get_recommendation_content_based, get_recommendation_collaborative_based
+from archive.driver import get_recommendation_content_based, get_recommendation_collaborative_based
 from PyQt5 import QtCore
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from PyQt5.QtWidgets import QWidget, QApplication, QTableView, QAbstractItemView, QPushButton, QVBoxLayout, QMessageBox, \
     QTabWidget
-
-import matplotlib.pyplot
 
 
 def table_view_factory(self):

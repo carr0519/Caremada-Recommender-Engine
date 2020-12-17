@@ -1,7 +1,5 @@
-import json
-import sys
 import pandas as pd
-from data.csv_file_handler import CsvFileHandler
+from archive.data.csv_file_handler import CsvFileHandler
 from machine_learning.content_based.content_based import ContentBased
 from machine_learning.collaborative_based.collaborative_filtering import CollaborativeBased
 from pprint import pprint
@@ -34,7 +32,7 @@ def collaborative_based_filtering(user_profiles, uid):
 
 
 def get_recommendation_collaborative_based(selected_key=3):
-    path_user_profiles = "..\\data"
+    path_user_profiles = "../data"
     file_user_profiles = "user_profile_logs.csv"
     user_profile_movie_data = get_datagram(path_user_profiles, file_user_profiles)
     result = collaborative_based_filtering(user_profile_movie_data, selected_key)
@@ -42,7 +40,7 @@ def get_recommendation_collaborative_based(selected_key=3):
 
 
 def get_recommendation_content_based(movie_title):
-    path_movies_csv = "..\\data"
+    path_movies_csv = "../data"
     file_movies_csv = "sample_movie_dataset.csv"
     movie_csv = get_datagram(path_movies_csv, file_movies_csv)
     result = content_based_filtering(movie_title, movie_csv, )
@@ -51,9 +49,9 @@ def get_recommendation_content_based(movie_title):
 
 # Program main
 if __name__ == "__main__":
-    path_movies_csv = "..\\data"
+    path_movies_csv = "../data"
     file_movies_csv = "sample_movie_dataset.csv"
-    path_user_profiles = "..\\data"
+    path_user_profiles = "../data"
     file_user_profiles = "user_profile_logs.csv"
 
     selected_key = "American Honey"
