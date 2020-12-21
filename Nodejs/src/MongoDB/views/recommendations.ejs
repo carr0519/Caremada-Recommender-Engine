@@ -8,8 +8,9 @@
         <!--table-hover -->
         <thead>
           <tr>
+            <% headers.push("Cosine Similarity") %>
             <% headers.forEach(function(col) { %>
-                <% if (col == '_id') return; %>
+                <% if (col === '_id') return; %>
               <th><%= col %></th>
             <% }); %>
           </tr>
@@ -18,8 +19,9 @@
         <tbody>
 
           <tr>
+            <% record['Cosine Similarity'] = "N/A"; %>
             <% headers.forEach(function(col) { %>
-              <% if (col == '_id') return; %>
+              <% if (col === '_id') return; %>
               <td id="<%= col %>-1">
                 <strong style="color:brown"><%= record[col] %></strong>
               </td>
@@ -27,13 +29,14 @@
           </tr>
 
           <% dataset.forEach(function(entry, index) { %>
+            <% entry['Cosine Similarity'] = String(entry['Cosine Similarity']*100).substring(0, 6) + '%' %>
             <tr>
               <% headers.forEach(function(col) { %>
+                <% if (col === '_id') return; %>
                 <td id="<%= col %><%= index+1 %>">
                   <%= entry[col] %>
                 </td>
               <% }); %>
-              <td><%= String(entry['Cosine Similarity']*100).substring(0, 6) %>%</td>
             </tr>
           <% }); %>
 

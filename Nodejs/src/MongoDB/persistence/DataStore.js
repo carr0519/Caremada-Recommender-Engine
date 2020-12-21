@@ -1,10 +1,9 @@
 const mongoose = require("mongoose");
 const csvtojson = require("csvtojson");
 
-//const uri = "mongodb://localhost:27017/caremadaDB";
-const uri = process.env.DB_CONNECTION;
+//const uri = process.env.DB_CONNECTION;
+const uri = "mongodb://localhost:27017/caremadaDB";
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }, () => console.log("Connected to MongoDB server."));
-
 
 const Movie = require('../models/Movie.js')
 const Caregiver = require('../models/Caregivers.js')
@@ -19,6 +18,7 @@ function getModel(name) {
     }
 }
 
+
 function getHeaders(name) {
     switch (name) {
         case 'caregivers':
@@ -27,6 +27,7 @@ function getHeaders(name) {
             return Movie.headers;
     }
 }
+
 
 function getCsvName(name) {
     switch (name) {
@@ -37,6 +38,7 @@ function getCsvName(name) {
     }
 }
 
+
 async function getDataSet(datasetName) {
     return {
         headers: getHeaders(datasetName),
@@ -44,32 +46,39 @@ async function getDataSet(datasetName) {
     }
 }
 
-async function reloadDataset(datasetName) {
+
+function reloadDataset(datasetName) {
     const model = getModel(datasetName);
-    await model.deleteMany().exec();
-    await csvtojson()
-        .fromFile(__dirname + getCsvName(datasetName))
-        .then(csvData => model.create(csvData));
+    return model.deleteMany().exec()
+        .then(csvtojson()
+            .fromFile(__dirname + getCsvName(datasetName))
+            .then(csvData => model.create(csvData))
+        )
 }
 
-async function getRecord(datasetName, id) {
-    return await getModel(datasetName).findById(id).exec();
+
+function getRecord(datasetName, id) {
+    return getModel(datasetName).findById(id).exec();
 }
 
-async function insertRecord(datasetName, record) {
-    await getModel(datasetName).create(record);
+
+function insertRecord(datasetName, record) {
+    return getModel(datasetName).create(record);
 }
 
-async function editRecord(datasetName, id, record) {
-    await getModel(datasetName).updateOne({ _id: id }, { $set: record }).exec();
+
+function editRecord(datasetName, id, record) {
+    return getModel(datasetName).updateOne({ _id: id }, { $set: record }).exec();
 }
 
-async function deleteRecord(datasetName, id) {
-    await getModel(datasetName).findByIdAndDelete(id).exec();
+
+function deleteRecord(datasetName, id) {
+    return getModel(datasetName).findByIdAndDelete(id).exec();
 }
 
 
 module.exports = {
+    getHeaders,
     getDataSet,
     reloadDataset,
     getRecord,

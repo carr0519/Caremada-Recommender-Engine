@@ -2,7 +2,7 @@
   "name": "caremada_recommender_engine",
   "version": "1.0.0",
   "description": "",
-  "main": "./src/app.js",
+  "main": "./src/mySQL/app.js",
   "scripts": {
     "test": "mocha src --timeout 5000 --reporter spec",
     "doc": "jsdoc -c jsdoc.json"
@@ -17,7 +17,6 @@
     "dotenv": "^8.2.0",
     "ejs": "^3.1.5",
     "express": "^4.17.1",
-    "ip": "^1.1.5",
     "mocha": "^8.2.1",
     "mongoose": "^5.11.4",
     "mysql": "^2.18.1",
