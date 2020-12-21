@@ -59,7 +59,6 @@ def handle_client(conn, addr):
         myresult = mycursor.fetchall()
         mylist = myresult
         mydf = DataFrame(mylist)
-        # print(mydf)
 
         mycursor.execute("SELECT column_name FROM information_schema.columns WHERE table_name='caregiver';")
         mycolumnnames = mycursor.fetchall()

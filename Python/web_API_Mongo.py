@@ -15,8 +15,8 @@ server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind(ADDR)
 FORMAT = 'utf-8'
 
-client = MongoClient('mongodb+srv://admin-alex:caremada6@cluster0.5inmr.mongodb.net/caremadaDB?retryWrites=true&w=majority')
-# client = MongoClient('mongodb://localhost:27017')
+# client = MongoClient('mongodb+srv://admin-alex:caremada6@cluster0.5inmr.mongodb.net/caremadaDB?retryWrites=true&w=majority')
+client = MongoClient('mongodb://localhost:27017')
 db = client['caremadaDB']
 collection = None
 filter_list = None

@@ -1,34 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d6a1cc2c-a051-40e7-95a1-e679d2355bd5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/archive/util/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Nodejs/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Nodejs/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Nodejs/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Nodejs/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Nodejs/src/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Nodejs/src/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Nodejs/src/controller/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Nodejs/src/controller/routes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Nodejs/src/views/display.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../Nodejs/src/views/display.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Nodejs/src/views/recommendations.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../Nodejs/src/views/recommendations.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API.py" beforeDir="false" afterPath="$PROJECT_DIR$/archive/API.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/Mock_Caremada.csv" beforeDir="false" afterPath="$PROJECT_DIR$/archive/data/Mock_Caremada.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/archive/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/csv_file_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/archive/data/csv_file_handler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/sample_movie_dataset.csv" beforeDir="false" afterPath="$PROJECT_DIR$/archive/data/sample_movie_dataset.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/test_file.txt" beforeDir="false" afterPath="$PROJECT_DIR$/archive/data/test_file.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/user_profile_logs.csv" beforeDir="false" afterPath="$PROJECT_DIR$/archive/data/user_profile_logs.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/driver/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/archive/data/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/driver/engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/archive/driver/engine.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/machine_learning/collaborative_based/collaborative_filtering.py" beforeDir="false" afterPath="$PROJECT_DIR$/machine_learning/collaborative_based/collaborative_filtering.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/machine_learning/content_based/content_based.py" beforeDir="false" afterPath="$PROJECT_DIR$/machine_learning/content_based/content_based.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unit_testing/test_collaborative_based.py" beforeDir="false" afterPath="$PROJECT_DIR$/unit_testing/test_collaborative_based.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unit_testing/test_content_based.py" beforeDir="false" afterPath="$PROJECT_DIR$/unit_testing/test_content_based.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unit_testing/test_csv_file_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/unit_testing/test_csv_file_handler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/util/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/archive/driver/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/util/gui.py" beforeDir="false" afterPath="$PROJECT_DIR$/archive/util/gui.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/util/user_randomizer.py" beforeDir="false" afterPath="$PROJECT_DIR$/archive/util/user_randomizer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web_API.py" beforeDir="false" afterPath="$PROJECT_DIR$/web_API.py" afterDir="false" />
-    </list>
+    <list default="true" id="d6a1cc2c-a051-40e7-95a1-e679d2355bd5" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
